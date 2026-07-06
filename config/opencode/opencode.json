@@ -1,5 +1,5 @@
 {
-  "plugin": ["opencode-ponytail", "opencode-dynamic-context-pruning", "opencode-vibeguard", "opencode-websearch-cited"],
+  "plugin": ["opencode-ponytail"],
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
@@ -11,5 +11,6 @@
     }
   },
   "model": "ollama/gemma4:latest",
-  "small_model": "ollama/qwen3.5:9b"
+  "small_model": "ollama/qwen3.5:9b",
+  "ignore": [".env*", "*.env", "**/.env*"]
 }
