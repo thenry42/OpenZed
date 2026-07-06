@@ -1,4 +1,8 @@
 {
+  "auto_install_extensions": {
+    "colored-zed-icons-theme": true,
+    "material-icon-theme": true
+  },
   "cli_default_open_behavior": "new_window",
   "theme": {
     "mode": "dark",
