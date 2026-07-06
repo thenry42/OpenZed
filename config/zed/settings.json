@@ -1,0 +1,13 @@
+{
+  "theme": {
+    "mode": "dark",
+    "dark": "1984",
+    "light": "1984"
+  },
+  "agent_servers": {
+    "OpenCode": {
+      "command": "opencode",
+      "args": ["acp"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-ponytail"],
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {}
+    }
+  },
+  "model": "ollama/gemma4:latest",
+  "small_model": "ollama/qwen3.5:9b"
+}
