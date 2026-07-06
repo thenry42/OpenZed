@@ -1,14 +1,25 @@
 {
+  "cli_default_open_behavior": "new_window",
   "theme": {
     "mode": "dark",
     "dark": "1984",
     "light": "1984"
   },
   "agent_servers": {
-    "OpenCode": {
-      "type": "custom",
-      "command": "opencode",
-      "args": ["acp"]
+    "opencode": {
+      "type": "registry"
     }
+  },
+  "buffer_font_size": 15,
+  "ui_font_size": 14,
+  "buffer_font_family": ".ZedMono",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_close_button": "always"
+  },
+  "status_bar": {
+    "active_language_button": true,
+    "cursor_position_button": true
   }
 }

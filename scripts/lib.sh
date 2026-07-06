@@ -5,10 +5,9 @@ set -euo pipefail
 
 OPENZED_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-OPENZED_MODEL="${OPENZED_MODEL:-gemma4:latest}"
-OPENZED_SMALL_MODEL="${OPENZED_SMALL_MODEL:-qwen3.5:9b}"
+OPENZED_MODEL="${OPENZED_MODEL:-deepseek/deepseek-v4-flash}"
+OPENZED_SMALL_MODEL="${OPENZED_SMALL_MODEL:-deepseek/deepseek-v4-flash}"
 OPENZED_BIN_DIR="${OPENZED_BIN_DIR:-$HOME/.local/bin}"
-OPENZED_OLLAMA_URL="${OPENZED_OLLAMA_URL:-http://localhost:11434/v1}"
 
 if [[ -f "$OPENZED_ROOT/.env" ]]; then
   # shellcheck source=/dev/null
@@ -26,12 +25,10 @@ ok()    { echo -e "${GREEN}   ✓${NC} $*"; }
 warn()  { echo -e "${MUTED}   !${NC} $*"; }
 die()   { echo -e "${RED}error:${NC} $*" >&2; exit 1; }
 
-ensure_bin_dir() {
-  mkdir -p "$OPENZED_BIN_DIR"
-}
+ensure_bin_dir() { mkdir -p "$OPENZED_BIN_DIR"; }
 
 ensure_path() {
-  ensure_bin_dir
+  mkdir -p "$OPENZED_BIN_DIR"
   case ":$PATH:" in
     *":$OPENZED_BIN_DIR:"*) return 0 ;;
   esac
@@ -55,7 +52,4 @@ ensure_path() {
   fi
 }
 
-require_cmd() {
-  local cmd="$1"
-  command -v "$cmd" &>/dev/null || die "'$cmd' is required but not installed"
-}
+require_cmd() { command -v "$1" &>/dev/null || die "'$1' is required but not installed"; }

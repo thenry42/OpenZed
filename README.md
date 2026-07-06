@@ -1,16 +1,17 @@
 # OpenZed
 
-Zed + OpenCode + Ollama with prewired config.
+Zed + OpenCode with prewired config.
 
 ## Install
 
 ```bash
 git clone https://github.com/thenry42/OpenZed.git
 cd OpenZed
+cp .env.example .env   # add your OPENROUTER_API_KEY
 ./install.sh
 ```
 
-This installs Ollama, OpenCode, Zed, and configures everything.
+This installs OpenCode, Zed, and configures everything.
 
 Zed alone: `./scripts/install-zed.sh`
 
@@ -25,9 +26,6 @@ Or open Zed and start an `OpenCode` thread.
 
 ## Config
 
-- Local Ollama at `http://localhost:11434/v1`
-- Default: `OPENZED_MODEL=gemma4:latest`
-- Override: `OPENZED_MODEL=qwen2.5-coder:7b ./install.sh`
-- Skip models: `./install.sh --skip-models`
-
-Export `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY` before running for paid models.
+- Default models via OpenRouter: `~anthropic/claude-haiku-latest` (primary), `qwen/qwen3-8b` (small)
+- Override: `OPENZED_MODEL=~anthropic/claude-sonnet-latest ./install.sh`
+- Set `OPENROUTER_API_KEY` in `.env` before installing

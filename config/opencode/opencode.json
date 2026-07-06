@@ -1,16 +1,15 @@
 {
-  "plugin": ["opencode-ponytail"],
+  "plugin": ["opencode-ponytail", "opencode-ignore"],
   "provider": {
-    "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama",
+    "openrouter": {
+      "npm": "@openrouter/ai-sdk-provider",
+      "name": "OpenRouter",
       "options": {
-        "baseURL": "http://localhost:11434/v1"
+        "apiKey": "{env:OPENROUTER_API_KEY}"
       },
+      "whitelist": ["deepseek/deepseek-v4-flash"],
       "models": {}
     }
   },
-  "model": "ollama/gemma4:latest",
-  "small_model": "ollama/qwen3.5:9b",
-  "ignore": [".env*", "*.env", "**/.env*"]
+  "model": "openrouter/deepseek/deepseek-v4-flash"
 }

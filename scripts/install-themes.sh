@@ -10,49 +10,38 @@ info "Installing themes"
 ZED_DIR="$HOME/.config/zed"
 OPENCODE_DIR="$HOME/.config/opencode"
 
-install_theme_dir() {
-  local src="$1" dest="$2"
-  [[ -d "$src" ]] || return 0
-
-  local count=0
-  mkdir -p "$dest"
-  for theme in "$src"/*.json; do
+# Install themes into ZED
+if [[ -d "$OPENZED_ROOT/config/zed/themes" ]]; then
+  mkdir -p "$ZED_DIR/themes"
+  count=0
+  for theme in "$OPENZED_ROOT/config/zed/themes"/*.json; do
     [[ -f "$theme" ]] || continue
-    cp -f "$theme" "$dest/"
+    cp -f "$theme" "$ZED_DIR/themes/"
     count=$((count + 1))
   done
-
   if (( count > 0 )); then
-    ok "Installed $count theme(s) into $dest"
+    ok "Installed $count theme(s) into $ZED_DIR/themes"
   fi
-}
+fi
 
-install_theme_dir "$OPENZED_ROOT/config/zed/themes" "$ZED_DIR/themes"
-install_theme_dir "$OPENZED_ROOT/config/opencode/themes" "$OPENCODE_DIR/themes"
+# Install themes into OpenCode
+if [[ -d "$OPENZED_ROOT/config/opencode/themes" ]]; then
+  mkdir -p "$OPENCODE_DIR/themes"
+  count=0
+  for theme in "$OPENZED_ROOT/config/opencode/themes"/*.json; do
+    [[ -f "$theme" ]] || continue
+    cp -f "$theme" "$OPENCODE_DIR/themes/"
+    count=$((count + 1))
+  done
+  if (( count > 0 )); then
+    ok "Installed $count theme(s) into $OPENCODE_DIR/themes"
+  fi
+fi
 
 TUI_SRC="$OPENZED_ROOT/config/opencode/tui.json"
 TUI_DEST="$OPENCODE_DIR/tui.json"
 
 if [[ -f "$TUI_SRC" ]]; then
-  python3 - "$TUI_SRC" "$TUI_DEST" <<'PY'
-import json, sys
-
-src, dest = sys.argv[1], sys.argv[2]
-
-with open(src) as f:
-    patch = json.load(f)
-
-try:
-    with open(dest) as f:
-        tui = json.load(f)
-except (FileNotFoundError, json.JSONDecodeError):
-    tui = {}
-
-tui.update(patch)
-
-with open(dest, "w") as f:
-    json.dump(tui, f, indent=2)
-    f.write("\n")
-PY
+  python3 "$OPENZED_ROOT/config/patch.py" generic "$TUI_SRC" "$TUI_DEST"
   ok "Wrote $TUI_DEST"
 fi
