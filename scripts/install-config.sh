@@ -25,6 +25,16 @@ export OPENZED_MODEL OPENZED_SMALL_MODEL OPENZED_BIN_DIR
 python3 "$OPENZED_ROOT/config/patch.py" opencode "$OPENCODE_SRC" "$OPENCODE_DEST"
 ok "Wrote $OPENCODE_DEST"
 
+# --- custom commands, skills, and agents ---
+for dir in command skills agents; do
+  src="$OPENZED_ROOT/config/opencode/$dir"
+  if [[ -d "$src" ]]; then
+    cp -r "$src/" "$OPENCODE_DIR/"
+    ok "Copied $dir/ to $OPENCODE_DIR"
+  fi
+done
+
+
 # --- Zed settings.json (merge agent_servers) ---
 ZED_DEST="$ZED_DIR/settings.json"
 ZED_SRC="$OPENZED_ROOT/config/zed/settings.json"
