@@ -26,7 +26,7 @@ python3 "$OPENZED_ROOT/config/patch.py" opencode "$OPENCODE_SRC" "$OPENCODE_DEST
 ok "Wrote $OPENCODE_DEST"
 
 # --- custom commands, skills, and agents ---
-for dir in command skills agents; do
+for dir in command skills agents rules; do
   src="$OPENZED_ROOT/config/opencode/$dir"
   if [[ -d "$src" ]]; then
     cp -r "$src/" "$OPENCODE_DIR/"

@@ -1,5 +1,11 @@
 {
   "plugin": ["opencode-ponytail", "opencode-ignore"],
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  },
   "provider": {
     "openrouter": {
       "npm": "@openrouter/ai-sdk-provider",
@@ -7,7 +13,16 @@
       "options": {
         "apiKey": "{env:OPENROUTER_API_KEY}"
       },
-      "whitelist": ["deepseek/deepseek-v4-flash"],
+      "whitelist": [
+        "deepseek/deepseek-v4-flash",
+        "deepseek/deepseek-v3.2",
+        "google/gemini-2.5-flash-lite",
+        "meta-llama/llama-4-scout",
+        "mistralai/mistral-small-3.2-24b-instruct",
+        "qwen/qwen3-30b-a3b-instruct-2507",
+        "qwen/qwen3-coder-30b-a3b-instruct",
+        "qwen/qwen3-coder:free"
+      ],
       "models": {}
     }
   },

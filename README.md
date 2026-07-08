@@ -1,31 +1,54 @@
 # OpenZed
 
-Zed + [OpenCode](https://opencode.ai) — preconfigured AI dev stack.
+> Zed + [OpenCode](https://opencode.ai) — zero-config AI dev stack for Fedora.
 
-## Quick start
+<p align="center">
+  <img src="https://img.shields.io/badge/Fedora-51A2DA?logo=fedora&logoColor=fff" alt="Fedora">
+  <img src="https://img.shields.io/badge/Zed-084?logo=zedindustries&logoColor=fff" alt="Zed">
+  <img src="https://img.shields.io/badge/OpenCode-6366f1?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgM2wxMCA2djZsLTEwIDYtMTAtNlY5eiIvPjxwb2x5bGluZSBwb2ludHM9IjEyIDE1IDkgMTIgMTIgOSAxNSAxMiIvPjwvc3ZnPg==&logoColor=fff" alt="OpenCode">
+  <img src="https://img.shields.io/badge/license-Unlicense-blue" alt="License">
+  <br>
+  <img src="https://img.shields.io/badge/ai_model-deepseek--v4--flash-FF6F00?logo=deepseek&logoColor=fff" alt="Default model">
+  <img src="https://img.shields.io/badge/ai_router-OpenRouter-8B5CF6?logo=openrouter&logoColor=fff" alt="OpenRouter">
+</p>
 
-```bash 
+---
+
+## ✨ Features
+
+- **One command setup** — installs OpenCode, Zed, configs, and themes
+- **Preconfigured AI** — wired to OpenRouter with DeepSeek V4 Flash out of the box
+- **Custom agents** — read-only `ask` mode, `deploy` mode, or whatever you need
+- **Auto-activated skills** — project conventions that load when relevant
+- **`/slash` commands** — fixed recipes for code review, deploy, etc.
+- **Everything in `~/.local/bin`** — no sudo, no clutter
+
+---
+
+## 🚀 Quick start
+
+```bash
 git clone https://github.com/thenry42/OpenZed.git
 cd OpenZed
-cp .env.example .env   # edit: add your OPENROUTER_API_KEY
+cp .env.example .env   # add your OPENROUTER_API_KEY
 ./install.sh
 ```
 
-Installs OpenCode, Zed, configs, and themes.
+> **Zed only?** `./scripts/install-zed.sh` (no OpenCode).
 
-**Zed only** (no OpenCode): `./scripts/install-zed.sh`
+---
 
-## Use
+## 🧠 Use
 
 ```bash
 opencode
 ```
 
-Or open Zed → **agent: new thread** → pick `OpenCode`.
+Make sure `~/.local/bin` is on your `PATH` (the installer adds it to `.zshrc`/`.bashrc`).
 
-Make sure `~/.local/bin` is on your `PATH` (installer adds it to `.zshrc`/`.bashrc`).
+---
 
-## Configuration
+## ⚙️ Configuration
 
 Override the default model before installing:
 
@@ -35,26 +58,18 @@ OPENZED_MODEL=~anthropic/claude-sonnet-latest ./install.sh
 
 | Env var | Default | What it does |
 |---|---|---|
-| `OPENROUTER_API_KEY` | — | API key for OpenRouter (required) |
-| `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary model |
+| `OPENROUTER_API_KEY` | — | API key for OpenRouter **(required)** |
+| `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model |
 
-## Customizing
+---
 
-All config lives in `config/opencode/`. Edit files here, then re-run `./install.sh` to sync to `~/.config/opencode/`.
+## 🎨 Customizing
 
-The three customization types work at different levels:
-
-| Type | Purpose | When it runs |
-|---|---|---|
-| **Agent** | A full persona with its own tool permissions (read-only, deploy, etc.) | You pick it from a list when starting a thread |
-| **Skill** | Background instructions that activate automatically when the task matches | The model detects the right moment and loads it |
-| **Command** | A fixed step-by-step recipe the model follows on request | You type `/command-name` in chat |
+All config lives in `config/opencode/`. Edit files here, then `./install.sh` to sync.
 
 ### Agents — different personas
 
-Each agent is a separate mode with its own tool access. The `ask` agent can only read — useful for quick questions without risking changes.
-
-`config/opencode/agents/ask.md`:
+Each agent has its own tool permissions. `ask` can only read — safe for quick questions:
 
 ```markdown
 ---
@@ -66,17 +81,13 @@ permissions:
   write: deny
   bash: deny
 ---
-
-You are a read-only Q&A agent. Use read/search tools only — never write or execute.
 ```
 
-Add a `deploy` agent with ssh/bash access, or a `review` agent that can only read and comment.
+Add a `deploy` agent with SSH access, or a `review` agent that only reads and comments.
 
 ### Skills — auto-activated instructions
 
-Skills encode project conventions that the model loads automatically when relevant.
-
-`config/opencode/skills/python-flake8/SKILL.md`:
+Skills encode project conventions and load automatically:
 
 ```markdown
 ---
@@ -90,9 +101,7 @@ description: activated when working with python files
 
 ### Commands — `/slash` recipes
 
-Commands are fixed workflows the model runs when you type `/command-name`.
-
-`config/opencode/command/review.md`:
+Type `/review` in chat to run a fixed workflow:
 
 ```markdown
 ---
@@ -105,4 +114,29 @@ description: "Request a code review of the current changes"
 4. Suggest specific improvements
 ```
 
-Type `/review` in chat to run it.
+---
+
+## 📁 Project structure
+
+```
+OpenZed/
+├── config/
+│   ├── opencode/          # agent, skill, and command definitions
+│   ├── zed/               # Zed editor settings
+│   └── patch.py           # OpenCode config patches
+├── scripts/
+│   ├── install-opencode.sh
+│   ├── install-zed.sh
+│   ├── install-config.sh
+│   ├── install-themes.sh
+│   └── lib.sh             # shared helpers
+├── install.sh             # one-shot installer
+├── .env.example           # env template
+└── README.md
+```
+
+---
+
+## 📄 License
+
+[The Unlicense](http://unlicense.org/) — public domain. Do whatever you want.
