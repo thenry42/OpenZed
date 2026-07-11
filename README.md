@@ -14,20 +14,19 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - **One command setup** — installs OpenCode, Zed, configs, and themes
 - **Preconfigured AI** — wired to OpenRouter with DeepSeek V4 Flash out of the box
-- **Free fallback** — no API key? OpenCode auto-selects its built-in free models
 - **Zed inline completions** — Zeta model (free, built-in) for ghost-text autocomplete
-- **Custom agents** — read-only `ask` mode, `deploy` mode, or whatever you need
+- **Custom agents** — `ask` (read-only), `build`, `plan`, or whatever you need
 - **Auto-activated skills** — project conventions that load when relevant
 - **`/slash` commands** — fixed recipes for code review, deploy, etc.
 - **Everything in `~/.local/bin`** — no sudo, no clutter
 
 ---
 
-## 🚀 Quick start
+## Quick start
 
 ```bash
 git clone https://github.com/thenry42/OpenZed.git
@@ -38,9 +37,11 @@ cp .env.example .env   # add your OPENROUTER_API_KEY
 
 > **Zed only?** `./scripts/install-zed.sh` (no OpenCode).
 
+OpenCode-provided models (see below) require an `OPENCODE_API_KEY`. Without either key, the installer falls back to `opencode/claude-sonnet-4-5` but it will not work — bring your own key.
+
 ---
 
-## 🧠 Use
+## Use
 
 ```bash
 opencode
@@ -52,26 +53,32 @@ Make sure `~/.local/bin` is on your `PATH` (the installer adds it to `.zshrc`/`.
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Override the default model before installing:
 
 ```bash
-OPENZED_MODEL=~anthropic/claude-sonnet-latest ./install.sh
+OPENZED_MODEL=anthropic/claude-sonnet-latest ./install.sh
 ```
 
-**No API key?** Just skip `.env` entirely — OpenCode falls back to its built-in free models (claude-sonnet-4-5, gemini-3-flash, deepseek-v4-flash).
+Set a different lightweight model for simple tasks:
+
+```bash
+OPENZED_MODEL=deepseek/deepseek-v4-flash \
+OPENZED_SMALL_MODEL=deepseek/deepseek-v3.2 \
+./install.sh
+```
 
 | Env var | Default | What it does |
 |---|---|---|
-| `OPENROUTER_API_KEY` | — | API key for OpenRouter. Leave empty for free models. |
-| `OPENCODE_API_KEY` | — | API key for OpenCode Zen (unlocks all models). Optional. |
+| `OPENROUTER_API_KEY` | — | API key for OpenRouter. Required for OpenRouter models. |
+| `OPENCODE_API_KEY` | — | API key for OpenCode-provided models (`claude-sonnet-4-5`, `gemini-3-flash`, etc.). |
 | `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model (OpenRouter). |
-| `OPENZED_SMALL_MODEL` | `deepseek/deepseek-v4-flash` | Lightweight model (OpenRouter). |
+| `OPENZED_SMALL_MODEL` | `deepseek/deepseek-v4-flash` | Lightweight model for simpler tasks (OpenRouter). Defaults to same as `OPENZED_MODEL` — only set if you want a cheaper/faster fallback. |
 
 ---
 
-## 🎨 Customizing
+## Customizing
 
 All config lives in `config/opencode/`. Edit files here, then `./install.sh` to sync.
 
@@ -83,7 +90,7 @@ Each agent has its own tool permissions. `ask` can only read — safe for quick 
 ---
 description: Answers codebase questions without making changes
 mode: primary
-permissions:
+permission:
   read: allow
   edit: deny
   write: deny
@@ -92,6 +99,8 @@ permissions:
 ```
 
 Add a `deploy` agent with SSH access, or a `review` agent that only reads and comments.
+
+`cat`, `head`, `tail`, and similar file-reading shell commands are denied globally — agents use the `read` tool instead, which respects project ignore rules.
 
 ### Skills — auto-activated instructions
 
@@ -124,27 +133,39 @@ description: "Request a code review of the current changes"
 
 ---
 
-## 📁 Project structure
+## Project structure
 
 ```
 OpenZed/
 ├── config/
-│   ├── opencode/          # agent, skill, and command definitions
-│   ├── zed/               # Zed editor settings
-│   └── patch.py           # OpenCode config patches
+│   ├── opencode/
+│   │   ├── agents/            # custom agent definitions (ask)
+│   │   ├── command/           # /slash command recipes
+│   │   ├── rules/             # global rules (context7 doc lookup)
+│   │   ├── skills/            # auto-activated project skills
+│   │   ├── themes/            # OpenCode TUI themes
+│   │   ├── opencode.json      # provider, model, permission config
+│   │   └── tui.json           # TUI layout
+│   ├── zed/
+│   │   ├── settings.json      # Zed editor settings + agent server
+│   │   └── themes/            # Zed editor themes
+│   └── patch.py               # env-aware config renderer
 ├── scripts/
 │   ├── install-opencode.sh
 │   ├── install-zed.sh
 │   ├── install-config.sh
 │   ├── install-themes.sh
-│   └── lib.sh             # shared helpers
-├── install.sh             # one-shot installer
-├── .env.example           # env template
+│   └── lib.sh                 # shared helpers
+├── install.sh                 # one-shot installer
+├── .env.example               # env template
+├── .gitignore
+├── .ignore                    # tool-ignore rules
+├── LICENSE
 └── README.md
 ```
 
 ---
 
-## 📄 License
+## License
 
 [The Unlicense](http://unlicense.org/) — public domain. Do whatever you want.

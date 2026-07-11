@@ -1,4 +1,5 @@
 # Ignore patterns for the AI
+# .opencodeignore is also used
 
 # Block specific directory
 /secrets/**

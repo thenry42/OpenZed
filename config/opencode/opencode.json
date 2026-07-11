@@ -1,5 +1,30 @@
 {
   "plugin": ["opencode-ponytail", "opencode-ignore"],
+  "permission": {
+    "bash": {
+      "cat *": "deny",
+      "/usr/bin/cat *": "deny",
+      "/bin/cat *": "deny",
+      "head *": "deny",
+      "tail *": "deny",
+      "less *": "deny",
+      "more *": "deny",
+      "strings *": "deny",
+      "xxd *": "deny",
+      "base64 *": "deny",
+      "od *": "deny",
+      "tac *": "deny",
+      "nl *": "deny",
+      "pr *": "deny",
+      "fold *": "deny",
+      "expand *": "deny",
+      "uniq *": "deny",
+      "sort *": "deny",
+      "rev *": "deny",
+      "cut *": "deny",
+      "paste *": "deny"
+    }
+  },
   "mcp": {
     "context7": {
       "type": "remote",

@@ -23,7 +23,7 @@ Environment (see .env.example):
   OPENZED_MODEL         Primary coding model (default: deepseek/deepseek-v4-flash)
   OPENZED_SMALL_MODEL   Lightweight model (default: deepseek/deepseek-v4-flash)
   OPENZED_BIN_DIR       Binary install dir (default: ~/.local/bin)
-  OPENROUTER_API_KEY    API key for OpenRouter models (optional — free models without it)
+  OPENROUTER_API_KEY    API key for OpenRouter models (required for OpenRouter models)
   OPENCODE_API_KEY      API key for OpenCode Zen models (optional)
 EOF
       exit 0
@@ -46,7 +46,7 @@ ok "OpenZed setup complete"
 echo ""
 echo "  Next steps:"
 echo "    1. Restart your shell (or: export PATH=\"$OPENZED_BIN_DIR:\$PATH\")"
-echo "    2. Set OPENROUTER_API_KEY in .env for OpenRouter models (optional)"
+echo "    2. Set OPENROUTER_API_KEY in .env for OpenRouter models"
 echo "    3. In Zed: agent: new thread → OpenCode"
 echo "    4. Or in a terminal: opencode"
 echo ""
