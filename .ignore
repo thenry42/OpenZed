@@ -17,3 +17,6 @@
 
 # Any Python files
 __pycache__
+
+# Allow .env.example
+!.env.example
