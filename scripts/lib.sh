@@ -14,6 +14,10 @@ if [[ -f "$OPENZED_ROOT/.env" ]]; then
   source "$OPENZED_ROOT/.env"
 fi
 
+# Ensure install scripts and their Python helpers see .env values.
+export OPENZED_MODEL OPENZED_SMALL_MODEL OPENZED_BIN_DIR
+export OPENROUTER_API_KEY OPENROUTER_BASE_URL OPENCODE_API_KEY
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'

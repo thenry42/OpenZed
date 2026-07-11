@@ -1,3 +1,5 @@
+# Ignore patterns for the AI
+
 # Block specific directory
 /secrets/**
 
@@ -11,3 +13,6 @@
 
 # Allow exception with negation
 !config.local.json
+
+# Any Python files
+__pycache__

@@ -24,6 +24,18 @@
         "qwen/qwen3-coder:free"
       ],
       "models": {}
+    },
+    "opencode": {
+      "name": "OpenCode",
+      "options": {
+        "apiKey": "{env:OPENCODE_API_KEY}"
+      },
+      "whitelist": [
+        "claude-sonnet-4-5",
+        "gemini-3-flash",
+        "deepseek-v4-flash"
+      ],
+      "models": {}
     }
   },
   "model": "openrouter/deepseek/deepseek-v4-flash"

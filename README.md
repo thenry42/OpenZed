@@ -18,6 +18,8 @@
 
 - **One command setup** — installs OpenCode, Zed, configs, and themes
 - **Preconfigured AI** — wired to OpenRouter with DeepSeek V4 Flash out of the box
+- **Free fallback** — no API key? OpenCode auto-selects its built-in free models
+- **Zed inline completions** — Zeta model (free, built-in) for ghost-text autocomplete
 - **Custom agents** — read-only `ask` mode, `deploy` mode, or whatever you need
 - **Auto-activated skills** — project conventions that load when relevant
 - **`/slash` commands** — fixed recipes for code review, deploy, etc.
@@ -46,6 +48,8 @@ opencode
 
 Make sure `~/.local/bin` is on your `PATH` (the installer adds it to `.zshrc`/`.bashrc`).
 
+**In Zed:** OpenCode is already configured as an agent server (`agent: new thread → OpenCode`). Inline completions use Zed's built-in Zeta model — free, no config needed.
+
 ---
 
 ## ⚙️ Configuration
@@ -56,10 +60,14 @@ Override the default model before installing:
 OPENZED_MODEL=~anthropic/claude-sonnet-latest ./install.sh
 ```
 
+**No API key?** Just skip `.env` entirely — OpenCode falls back to its built-in free models (claude-sonnet-4-5, gemini-3-flash, deepseek-v4-flash).
+
 | Env var | Default | What it does |
 |---|---|---|
-| `OPENROUTER_API_KEY` | — | API key for OpenRouter **(required)** |
-| `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model |
+| `OPENROUTER_API_KEY` | — | API key for OpenRouter. Leave empty for free models. |
+| `OPENCODE_API_KEY` | — | API key for OpenCode Zen (unlocks all models). Optional. |
+| `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model (OpenRouter). |
+| `OPENZED_SMALL_MODEL` | `deepseek/deepseek-v4-flash` | Lightweight model (OpenRouter). |
 
 ---
 

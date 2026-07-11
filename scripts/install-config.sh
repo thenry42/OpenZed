@@ -9,9 +9,19 @@ info "Installing OpenZed configs"
 
 require_cmd python3
 
+if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then
+  die "Do not run as root — configs must be owned by your user (./scripts/install-config.sh, not sudo)"
+fi
+
 OPENCODE_DIR="$HOME/.config/opencode"
 ZED_DIR="$HOME/.config/zed"
 mkdir -p "$OPENCODE_DIR" "$ZED_DIR"
+
+for dest in "$OPENCODE_DIR/opencode.json" "$HOME/.local/share/opencode/auth.json"; do
+  if [[ -e "$dest" && ! -w "$dest" ]]; then
+    die "$dest is not writable (likely owned by root). Fix with: sudo chown -R \$USER:\$USER $(dirname "$dest")"
+  fi
+done
 
 # --- opencode.json (render model names from env) ---
 OPENCODE_DEST="$OPENCODE_DIR/opencode.json"
@@ -21,7 +31,6 @@ if [[ -e "$OPENCODE_DEST" || -L "$OPENCODE_DEST" ]]; then
   rm -f "$OPENCODE_DEST"
 fi
 
-export OPENZED_MODEL OPENZED_SMALL_MODEL OPENZED_BIN_DIR
 python3 "$OPENZED_ROOT/config/patch.py" opencode "$OPENCODE_SRC" "$OPENCODE_DEST"
 ok "Wrote $OPENCODE_DEST"
 
