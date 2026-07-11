@@ -37,7 +37,7 @@ cp .env.example .env   # add your OPENROUTER_API_KEY
 
 > **Zed only?** `./scripts/install-zed.sh` (no OpenCode).
 
-OpenCode-provided models (see below) require an `OPENCODE_API_KEY`. Without either key, the installer falls back to `opencode/claude-sonnet-4-5` but it will not work — bring your own key.
+OpenCode-provided models (see below) require an `OPENCODE_API_KEY` and at least **$20 of base credits** on your OpenCode Zen account to route requests through their API. Without either key, the installer falls back to `opencode/deepseek-v4-flash` but it will not work — bring your own key.
 
 ---
 
@@ -58,23 +58,14 @@ Make sure `~/.local/bin` is on your `PATH` (the installer adds it to `.zshrc`/`.
 Override the default model before installing:
 
 ```bash
-OPENZED_MODEL=anthropic/claude-sonnet-latest ./install.sh
-```
-
-Set a different lightweight model for simple tasks:
-
-```bash
-OPENZED_MODEL=deepseek/deepseek-v4-flash \
-OPENZED_SMALL_MODEL=deepseek/deepseek-v3.2 \
-./install.sh
+BASE_MODEL=deepseek/deepseek-v4-flash ./install.sh
 ```
 
 | Env var | Default | What it does |
 |---|---|---|
 | `OPENROUTER_API_KEY` | — | API key for OpenRouter. Required for OpenRouter models. |
-| `OPENCODE_API_KEY` | — | API key for OpenCode-provided models (`claude-sonnet-4-5`, `gemini-3-flash`, etc.). |
-| `OPENZED_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model (OpenRouter). |
-| `OPENZED_SMALL_MODEL` | `deepseek/deepseek-v4-flash` | Lightweight model for simpler tasks (OpenRouter). Defaults to same as `OPENZED_MODEL` — only set if you want a cheaper/faster fallback. |
+| `OPENCODE_API_KEY` | — | API key for OpenCode-provided models |
+| `BASE_MODEL` | `deepseek/deepseek-v4-flash` | Primary coding model (OpenRouter). |
 
 ---
 

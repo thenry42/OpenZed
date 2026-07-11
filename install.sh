@@ -3,7 +3,7 @@
 #
 # Usage:
 #   ./install.sh
-#   OPENZED_MODEL=~anthropic/claude-haiku-latest ./install.sh
+#   BASE_MODEL=deepseek/deepseek-v4-flash ./install.sh
 
 set -euo pipefail
 
@@ -20,8 +20,7 @@ OpenZed installer
   ./install.sh              Install OpenCode, Zed, and configs
 
 Environment (see .env.example):
-  OPENZED_MODEL         Primary coding model (default: deepseek/deepseek-v4-flash)
-  OPENZED_SMALL_MODEL   Lightweight model (default: deepseek/deepseek-v4-flash)
+  BASE_MODEL            Primary coding model (default: deepseek/deepseek-v4-flash)
   OPENZED_BIN_DIR       Binary install dir (default: ~/.local/bin)
   OPENROUTER_API_KEY    API key for OpenRouter models (required for OpenRouter models)
   OPENCODE_API_KEY      API key for OpenCode Zen models (optional)

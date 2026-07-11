@@ -23,8 +23,7 @@ def patch_opencode(src, dest):
     """Render opencode.json with env vars — falls back to free models when no API key."""
     openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
     opencode_key = os.environ.get("OPENCODE_API_KEY", "")
-    model = os.environ.get("OPENZED_MODEL", "deepseek/deepseek-v4-flash")
-    small = os.environ.get("OPENZED_SMALL_MODEL", "deepseek/deepseek-v4-flash")
+    model = os.environ.get("BASE_MODEL", "deepseek/deepseek-v4-flash")
 
     with open(src) as f:
         cfg = json.load(f)
@@ -35,12 +34,10 @@ def patch_opencode(src, dest):
 
     if _openrouter_auth_available():
         cfg["model"] = f"openrouter/{model}"
-        cfg["small_model"] = f"openrouter/{small}"
 
         models = openrouter.setdefault("models", {})
         models.clear()
         models[model] = {"name": model, "tools": True}
-        models[small] = {"name": small, "tools": True}
 
         # Never write {env:...} placeholders to the installed config — when the
         # env var is missing at runtime OpenCode resolves them to "" and that
@@ -50,8 +47,7 @@ def patch_opencode(src, dest):
         else:
             openrouter_options.pop("apiKey", None)
     else:
-        cfg["model"] = "opencode/claude-sonnet-4-5"
-        cfg.pop("small_model", None)
+        cfg["model"] = "opencode/deepseek-v4-flash"
         openrouter_options.pop("apiKey", None)
 
         if opencode_key:

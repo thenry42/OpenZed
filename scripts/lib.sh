@@ -5,8 +5,7 @@ set -euo pipefail
 
 OPENZED_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-OPENZED_MODEL="${OPENZED_MODEL:-deepseek/deepseek-v4-flash}"
-OPENZED_SMALL_MODEL="${OPENZED_SMALL_MODEL:-deepseek/deepseek-v4-flash}"
+BASE_MODEL="${BASE_MODEL:-deepseek/deepseek-v4-flash}"
 OPENZED_BIN_DIR="${OPENZED_BIN_DIR:-$HOME/.local/bin}"
 
 if [[ -f "$OPENZED_ROOT/.env" ]]; then
@@ -15,7 +14,7 @@ if [[ -f "$OPENZED_ROOT/.env" ]]; then
 fi
 
 # Ensure install scripts and their Python helpers see .env values.
-export OPENZED_MODEL OPENZED_SMALL_MODEL OPENZED_BIN_DIR
+export BASE_MODEL OPENZED_BIN_DIR
 export OPENROUTER_API_KEY OPENROUTER_BASE_URL OPENCODE_API_KEY
 
 RED='\033[0;31m'

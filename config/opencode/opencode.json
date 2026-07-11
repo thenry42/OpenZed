@@ -56,7 +56,6 @@
         "apiKey": "{env:OPENCODE_API_KEY}"
       },
       "whitelist": [
-        "claude-sonnet-4-5",
         "gemini-3-flash",
         "deepseek-v4-flash"
       ],
