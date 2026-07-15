@@ -9,7 +9,7 @@
 </pre>
 </div>
  
-Zed + [OpenCode](https://opencode.ai) — zero-config AI dev stack for Fedora.
+[Zed](https://zed.dev/) + [OpenCode](https://opencode.ai) — zero-config AI dev stack for Fedora.
 
 ---
 
@@ -33,8 +33,6 @@ cd OpenZed
 cp .env.example .env   # add your OPENROUTER_API_KEY
 ./install.sh
 ```
-
-> **Zed only?** `./scripts/install-zed.sh` (no OpenCode).
 
 OpenCode-provided models (see below) require an `OPENCODE_API_KEY` and at least **$20 of base credits** on your OpenCode Zen account to route requests through their API. Without either key, the installer falls back to `opencode/deepseek-v4-flash` but it will not work — bring your own key.
 
