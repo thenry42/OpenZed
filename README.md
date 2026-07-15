@@ -1,23 +1,16 @@
-<pre align="center">
+<div align="center">
+
+```
  ██████╗ ██████╗ ███████╗███╗   ██╗███████╗███████╗██████╗
 ██╔═══██╗██╔══██╗██╔════╝████╗  ██║╚══███╔╝██╔════╝██╔══██╗
 ██║   ██║██████╔╝█████╗  ██╔██╗ ██║  ███╔╝ █████╗  ██║  ██║
 ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║ ███╔╝  ██╔══╝  ██║  ██║
 ╚██████╔╝██║     ███████╗██║ ╚████║███████╗███████╗██████╔╝
  ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═════╝
-</pre>
+
+</div>
 
 > Zed + [OpenCode](https://opencode.ai) — zero-config AI dev stack for Fedora.
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Fedora-51A2DA?logo=fedora&logoColor=fff" alt="Fedora">
-  <img src="https://img.shields.io/badge/Zed-084?logo=zedindustries&logoColor=fff" alt="Zed">
-  <img src="https://img.shields.io/badge/OpenCode-6366f1?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgM2wxMCA2djZsLTEwIDYtMTAtNlY5eiIvPjxwb2x5bGluZSBwb2ludHM9IjEyIDE1IDkgMTIgMTIgOSAxNSAxMiIvPjwvc3ZnPg==&logoColor=fff" alt="OpenCode">
-  <img src="https://img.shields.io/badge/license-Unlicense-blue" alt="License">
-  <br>
-  <img src="https://img.shields.io/badge/ai_model-deepseek--v4--flash-FF6F00?logo=deepseek&logoColor=fff" alt="Default model">
-  <img src="https://img.shields.io/badge/ai_router-OpenRouter-8B5CF6?logo=openrouter&logoColor=fff" alt="OpenRouter">
-</p>
 
 ---
 
