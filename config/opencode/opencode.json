@@ -1,4 +1,9 @@
 {
+  "instructions": [
+    "~/.config/opencode/rules/*.md",
+    ".opencode/rules/*.md",
+    ".opencode/learnings/LEARNINGS.md"
+  ],
   "plugin": ["opencode-ponytail", "opencode-ignore"],
   "permission": {
     "bash": {
